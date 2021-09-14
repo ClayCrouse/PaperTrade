@@ -1,15 +1,16 @@
+import React, {useState} from "react"
 
-function Balance({value}) {
-  return (
-    <div>
-        <p>
-            value: ${value}
-        </p>
-        <p>
-            percentage: {(value)/10000 * 100}%
-        </p>
-    </div>
-  );
+const Balance = () => {
+
+    const [balance, setBalance] = useState(10000.01)
+
+    return (
+        <div>
+            <h3>
+                Balance: ${balance}
+            </h3>
+        </div>
+    )
 }
 
-export default Balance;
+export default Balance
