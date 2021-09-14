@@ -1,9 +1,12 @@
 import express from "express";
 import { getPrice } from "./api.js";
+import cors from "cors";
 
 const app = express();
+app.use(cors());
 
 app.get("/test", (request, response) => {
+  console.log("test called");
   const jsonObject = {
     json: "working",
     test: "test",
@@ -13,11 +16,18 @@ app.get("/test", (request, response) => {
 });
 
 app.get("/data", async (req, res) => {
+  console.log("data called");
   const { ticker } = req.query;
-  const price = await getPrice(ticker);
-  res.json({
-    price: price,
-  });
+  if (ticker === "") {
+    res.json({
+      price: "-1",
+    });
+  } else {
+    const price = await getPrice(ticker);
+    res.json({
+      price: price,
+    });
+  }
 });
 
 const port = 8080;
