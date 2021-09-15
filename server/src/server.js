@@ -16,17 +16,14 @@ app.get("/test", (request, response) => {
 });
 
 app.get("/data", async (req, res) => {
-  console.log("data called");
   const { ticker } = req.query;
   if (ticker === "") {
     res.json({
       price: "-1",
     });
   } else {
-    const price = await getPrice(ticker);
-    res.json({
-      price: price,
-    });
+    const apiRes = await getPrice(ticker);
+    res.json(apiRes);
   }
 });
 

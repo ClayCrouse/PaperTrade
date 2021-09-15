@@ -6,9 +6,13 @@ import Header from "./components/Header";
 
 function App() {
   const getData = async () => {
-    const res = await fetch("http://localhost:8080/data?ticker=BTCUSDT");
-    const resJson = await res.json();
-    console.log(resJson);
+    const res = await fetch("http://localhost:8080/data?ticker=all");
+    const cryptos = await res.json();
+    const tickers = cryptos.map((crypto) => ({
+      ...crypto,
+      symbol: crypto.symbol.slice(0, -3),
+    }));
+    console.log(tickers);
   };
 
   return (
